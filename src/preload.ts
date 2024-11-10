@@ -6,6 +6,13 @@
 // prevent exposing the entire electron object to the renderer process. The renderer
 // process can only access the APIs that we expose via the context bridge.
 
+if (!process.contextIsolated) {
+  console.error('Renderer process is not context isolated');
+  throw new Error(
+    'contextIsolation must be enabled in the browser window'
+  );
+}
+
 import { ipcRenderer, contextBridge } from 'electron';
 import Elements from './renderer/elements';
 import { renderMarkdown } from './renderer/markdown';
