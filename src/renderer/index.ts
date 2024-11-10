@@ -1,3 +1,9 @@
+// ** Renderer Process:
+// The renderer process is responsible for rendering web content(HTML, CSS, JavaScript) in
+// each window and handles the user interface.Each window or tab runs its own renderer process,
+// working similarly to a browser tab, and is sandboxed from the operating system.Renderer processes
+// can use Node.js APIs if explicitly enabled(although it’s usually restricted for security reasons).
+
 import { renderMarkdown } from './markdown';
 import Elements from './elements';
 

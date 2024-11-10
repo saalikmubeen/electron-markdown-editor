@@ -1,6 +1,22 @@
+// ** Preload script for the renderer process:
+// This script will be loaded before other scripts run in the renderer process.
+// We can use this script to expose APIs to the renderer process via the context bridge.
+// Instead of exposing the entire electron object to the renderer process, we can expose
+// only the APIs that we need using the context bridge. This is a security measure to
+// prevent exposing the entire electron object to the renderer process. The renderer
+// process can only access the APIs that we expose via the context bridge.
+
 import { ipcRenderer, contextBridge } from 'electron';
 import Elements from './renderer/elements';
 import { renderMarkdown } from './renderer/markdown';
+
+// Old way of interacting with the main process using remote module:
+// const { remote } = require('electron');
+// remote module allows the renderer process to directly access main-process resources.
+// However, for security reasons, this approach is discouraged in favor of explicit IPC messaging.
+// const mainProcess = remote.require('./main/index');
+// Now through the mainProcess, we can access the functions defined and in the main process
+// and exported in the main/index.ts file like openFile, saveFile, showOpenDialog, etc.
 
 /*
 ipcRenderer.on('file-opened', (_, content: string) => {

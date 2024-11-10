@@ -1,3 +1,10 @@
+// * Main Process:
+// The main process manages the application's lifecycle and handles tasks that require
+// access to the operating system, such as creating windows, managing system - level resources,
+// or using native modules.It acts as the core of the app, creating instances of the renderer
+// processes for each window.The main process has full access to Node.js and Electron’s APIs,
+// giving it control over high - level functionality.
+
 import {
   app,
   BrowserWindow,
@@ -520,3 +527,31 @@ if (process.platform === 'darwin') {
 
 const applicationMenu = Menu.buildFromTemplate(template);
 Menu.setApplicationMenu(applicationMenu);
+
+/*
+
+
+Uisng libraries that compile to Native modules and code
+Native modules are packages in Node.js that rely on compiled code (often C++) to interact with
+system resources and provide functionality that is not available in JavaScript. These modules
+are essential for building performant and feature-rich applications, as they enable developers
+to access low-level system resources and libraries that are not available in JavaScript.
+
+In Electron apps, native modules (e.g., sqlite3 or node-sass) can face compatibility issues
+due to differences between the local Node version on the machine and the Node version bundled
+with Electron. To address this, electron-rebuild recompiles these modules to align with Electron’s
+specific version, ensuring smooth operation. The libraries using native modules are compiled down
+to the version of Node.js that is present on the user's machine while building the app by default.
+But the Node.js version that is present on the user's machine may not be the same as the Node.js
+version that is present in the Electron app. So the modules that are compiled down to the version
+of Node.js that is present on the user's machine may not work properly in the Electron app. To
+address this issue, we use electron-rebuild to recompile the native modules to the version of
+Node.js that is present in the Electron app. This ensures that the native modules work properly
+in the Electron app regardless of the Node.js version that is present on the user's machine.
+Electron Forge includes electron-rebuild by default, simplifying native module handling for
+cross-platform compatibility by automatically rebuilding modules during installation.
+This setup is especially useful when working with modules that require consistent behavior
+across different operating systems and configurations, which is essential for building a reliable
+Electron-based app.
+
+*/
